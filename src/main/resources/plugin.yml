@@ -1,0 +1,10 @@
+name: TabCompleteFilter
+main: lee.code.tcf.TabCompleteFilter
+version: ${project.version}
+api-version: 1.13
+author: Lee
+
+commands:
+  tcf:
+    description: Use the tcf command.
+    permission: tcf.command.use

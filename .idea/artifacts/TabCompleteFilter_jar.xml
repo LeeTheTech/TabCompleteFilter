@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TabCompleteFilter:jar">
+    <output-path>$USER_HOME$/Desktop/Minecraft Servers/1.16.3 Test Server/plugins</output-path>
+    <root id="archive" name="TabCompleteFilter.jar">
+      <element id="module-output" name="TabCompleteFilter" />
+    </root>
+  </artifact>
+</component>
