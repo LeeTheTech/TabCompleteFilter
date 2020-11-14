@@ -5,12 +5,13 @@ import java.util.List;
 import lee.code.tcf.TabCompleteFilter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandSendEvent;
 
 public class FilterListener implements Listener {
 
-    @EventHandler
+    @EventHandler (priority = EventPriority.HIGHEST)
     public void onPlayerCommandSendEvent(PlayerCommandSendEvent e) {
         TabCompleteFilter plugin = TabCompleteFilter.getPlugin();
 
