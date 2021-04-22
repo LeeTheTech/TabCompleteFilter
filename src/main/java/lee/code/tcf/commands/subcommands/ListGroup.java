@@ -3,7 +3,6 @@ package lee.code.tcf.commands.subcommands;
 import lee.code.tcf.TabCompleteFilter;
 import lee.code.tcf.commands.SubCommand;
 import lee.code.tcf.files.defaults.Lang;
-import lee.code.tcf.xseries.XMaterial;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -41,49 +40,35 @@ public class ListGroup extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-
         TabCompleteFilter plugin = TabCompleteFilter.getPlugin();
 
         //tcf add
-        if (args.length == 1) {
-            player.sendMessage(Lang.PREFIX.getConfigValue(null) + Lang.ERROR_COMMAND_LIST_ARG_1.getConfigValue(null));
-            return;
-        }
-
         if (args.length > 1) {
-
-            String group;
             if (plugin.getData().getGroups().contains(args[1])) {
-                group = args[1];
-            } else {
-                player.sendMessage(Lang.PREFIX.getConfigValue(null) + Lang.ERROR_GROUP_DOES_NOT_EXIST.getConfigValue(new String[]{ args[1] }));
-                return;
-            }
+                String group = args[1];
 
-            List<String> commands = plugin.getData().getGroupList(group);
+                List<String> commands = plugin.getData().getGroupList(group);
 
-            int page = 0;
+                int page = 0;
 
-            //page check
-            if (args.length > 2) {
-                Scanner sellScanner = new Scanner(args[2]);
-                if (sellScanner.hasNextInt()) {
-                    page = Integer.parseInt(args[2]);
-                } else {
-                    player.sendMessage(Lang.PREFIX.getConfigValue(null) + Lang.ERROR_COMMAND_LIST_PAGE.getConfigValue(new String[]{ args[2]} ));
-                    return;
+                //page check
+                if (args.length > 2) {
+                    Scanner sellScanner = new Scanner(args[2]);
+                    if (sellScanner.hasNextInt()) {
+                        page = Integer.parseInt(args[2]);
+                    } else {
+                        player.sendMessage(Lang.PREFIX.getConfigValue(null) + Lang.ERROR_COMMAND_LIST_PAGE.getConfigValue(new String[]{ args[2]} ));
+                        return;
+                    }
                 }
-            }
 
-            if (page < 0) return;
+                if (page < 0) return;
 
-            int index = 0;
-            int maxDisplayed = 10;
-
-            List<String> formattedList = new ArrayList<>();
-            formattedList.add(Lang.MESSAGE_COMMAND_LIST_HEADER.getConfigValue(new String[] { group.toUpperCase() }));
-
-            if (commands != null && !commands.isEmpty()) {
+                int index;
+                int maxDisplayed = 10;
+                List<String> formattedList = new ArrayList<>();
+                if (commands != null && !commands.isEmpty()) {
+                    formattedList.add(Lang.MESSAGE_COMMAND_LIST_HEADER.getConfigValue(new String[] { group.toUpperCase() }));
                     for(int i = 0; i < maxDisplayed; i++) {
                         index = maxDisplayed * page + i;
                         if (index >= commands.size()) break;
@@ -94,31 +79,31 @@ public class ListGroup extends SubCommand {
                             formattedList.add(Lang.MESSAGE_COMMAND_LIST_COMMAND.getConfigValue(new String[] { String.valueOf(commandNumber), command }));
                         }
                     }
-            }
+                }
 
-            if (formattedList.size() < 2) return;
+                if (formattedList.size() < 2) return;
 
-            for (String line : formattedList) {
-                player.sendMessage(plugin.getUtility().format(line));
-            }
+                for (String line : formattedList) player.sendMessage(plugin.getPU().format(line));
 
-            //next page
-            TextComponent next = new TextComponent(Lang.MESSAGE_COMMAND_LIST_NEXT_PAGE.getConfigValue(null));
-            next.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tcf list " + group + " " + (page + 1)));
-            if (XMaterial.supports(16)) next.setHoverEvent(new HoverEvent( HoverEvent.Action.SHOW_TEXT, new Text(Lang.MESSAGE_COMMAND_LIST_NEXT_PAGE_HOVER.getConfigValue(null))));
-            else next.setHoverEvent(new HoverEvent( HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Lang.MESSAGE_COMMAND_LIST_NEXT_PAGE_HOVER.getConfigValue(null)).create()));
-            //previous page
-            TextComponent previous = new TextComponent(Lang.MESSAGE_COMMAND_LIST_PREVIOUS_PAGE.getConfigValue(null));
-            previous.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tcf list " + group + " " + (page - 1)));
-            if (XMaterial.supports(16)) previous.setHoverEvent(new HoverEvent( HoverEvent.Action.SHOW_TEXT, new Text(Lang.MESSAGE_COMMAND_LIST_PREVIOUS_PAGE_HOVER.getConfigValue(null))));
-            else previous.setHoverEvent(new HoverEvent( HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Lang.MESSAGE_COMMAND_LIST_PREVIOUS_PAGE_HOVER.getConfigValue(null)).create()));
-            //spacer
-            TextComponent spacer = new TextComponent(" | ");
-            spacer.setBold(true);
-            spacer.setColor(ChatColor.GRAY);
+                //next page
+                TextComponent next = new TextComponent(Lang.MESSAGE_COMMAND_LIST_NEXT_PAGE.getConfigValue(null));
+                next.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tcf list " + group + " " + (page + 1)));
+                if (plugin.getPU().supports(16)) next.setHoverEvent(new HoverEvent( HoverEvent.Action.SHOW_TEXT, new Text(Lang.MESSAGE_COMMAND_LIST_NEXT_PAGE_HOVER.getConfigValue(null))));
+                else next.setHoverEvent(new HoverEvent( HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Lang.MESSAGE_COMMAND_LIST_NEXT_PAGE_HOVER.getConfigValue(null)).create()));
+                //previous page
+                TextComponent previous = new TextComponent(Lang.MESSAGE_COMMAND_LIST_PREVIOUS_PAGE.getConfigValue(null));
+                previous.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tcf list " + group + " " + (page - 1)));
+                if (plugin.getPU().supports(16)) previous.setHoverEvent(new HoverEvent( HoverEvent.Action.SHOW_TEXT, new Text(Lang.MESSAGE_COMMAND_LIST_PREVIOUS_PAGE_HOVER.getConfigValue(null))));
+                else previous.setHoverEvent(new HoverEvent( HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Lang.MESSAGE_COMMAND_LIST_PREVIOUS_PAGE_HOVER.getConfigValue(null)).create()));
+                //spacer
+                TextComponent spacer = new TextComponent(" | ");
+                spacer.setBold(true);
+                spacer.setColor(ChatColor.GRAY);
 
-            player.spigot().sendMessage(previous, spacer, next);
-        }
+                player.spigot().sendMessage(previous, spacer, next);
+
+            } else player.sendMessage(Lang.PREFIX.getConfigValue(null) + Lang.ERROR_GROUP_DOES_NOT_EXIST.getConfigValue(new String[]{ args[1] }));
+        } else player.sendMessage(Lang.PREFIX.getConfigValue(null) + Lang.ERROR_COMMAND_LIST_ARG_1.getConfigValue(null));
     }
 
     @Override

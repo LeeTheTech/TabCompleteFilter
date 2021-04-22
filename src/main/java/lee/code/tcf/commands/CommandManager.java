@@ -12,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import lombok.Getter;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class CommandManager implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
         TabCompleteFilter plugin = TabCompleteFilter.getPlugin();
 
@@ -62,7 +63,7 @@ public class CommandManager implements CommandExecutor {
             lines.add("&r");
             lines.add(Lang.MESSAGE_HELP_DIVIDER.getConfigValue(null));
 
-            for (String line : lines) p.sendMessage(plugin.getUtility().format(line));
+            for (String line : lines) p.sendMessage(plugin.getPU().format(line));
             return true;
 
         }

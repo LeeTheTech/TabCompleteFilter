@@ -13,14 +13,14 @@ public class TabCompleteFilter extends JavaPlugin {
 
     @Getter private FileManager fileManager;
     @Getter private Data data;
-    @Getter private Utility utility;
+    @Getter private PU pU;
 
     @Override
     public void onEnable() {
 
         this.fileManager = new FileManager();
         this.data = new Data();
-        this.utility = new Utility();
+        this.pU = new PU();
 
         //File Manager for configs
         fileManager.addConfig("config");

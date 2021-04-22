@@ -3,8 +3,7 @@ package lee.code.tcf.files;
 import lee.code.tcf.TabCompleteFilter;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
 import lombok.RequiredArgsConstructor;
@@ -12,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class FileManager {
 
-    private final Map<String, CustomFile> configs = new HashMap<>();
+    private final ConcurrentHashMap<String, CustomFile> configs = new ConcurrentHashMap<>();
 
     public void addConfig(String name) {
         TabCompleteFilter plugin = TabCompleteFilter.getPlugin();

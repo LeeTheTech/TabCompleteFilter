@@ -6,20 +6,20 @@ import java.util.Collections;
 import java.util.List;
 
 import lee.code.tcf.TabCompleteFilter;
-import lombok.RequiredArgsConstructor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
-@RequiredArgsConstructor
+import javax.annotation.Nonnull;
+
 public class TabCompletion implements TabCompleter {
 
     private final List<String> commands = Arrays.asList("reload", "add", "remove", "list");
     private final List<String> blank = new ArrayList<>();
 
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+    public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String alias, @Nonnull String[] args) {
         TabCompleteFilter plugin = TabCompleteFilter.getPlugin();
 
         if (sender instanceof Player) {
@@ -35,7 +35,6 @@ public class TabCompletion implements TabCompleter {
                 else if (args.length == 3) return StringUtil.copyPartialMatches(args[2], Collections.singletonList("<command>"), new ArrayList<>());
             }
         }
-
         return blank;
     }
 }

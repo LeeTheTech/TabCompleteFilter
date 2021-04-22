@@ -12,6 +12,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
 public class CustomFile {
+
     File file;
     File path;
     YamlConfiguration config;
@@ -25,7 +26,6 @@ public class CustomFile {
         file = new File(this.plugin.getDataFolder() + path, name);
         this.path = new File(this.plugin.getDataFolder() + path);
         config = new YamlConfiguration();
-
         createFile();
     }
 
@@ -43,10 +43,8 @@ public class CustomFile {
 
     //creates file
     private void createFile() {
-        if (!path.exists()) {
-            path.mkdirs();
-        }
-        if (defaults != null)
+        if (!path.exists()) path.mkdirs();
+        if (defaults != null) {
             try {
                 if (!file.exists()) {
                     InputStream in = defaults;
@@ -66,6 +64,7 @@ public class CustomFile {
                 plugin.getServer().getPluginManager().disablePlugin(plugin);
                 ex.printStackTrace();
             }
+        }
     }
 
     //fixes unicode
