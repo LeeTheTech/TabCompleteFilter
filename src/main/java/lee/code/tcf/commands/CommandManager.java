@@ -1,82 +1,76 @@
 package lee.code.tcf.commands;
 
-import lee.code.tcf.TabCompleteFilter;
-import lee.code.tcf.commands.subcommands.AddGroup;
-import lee.code.tcf.commands.subcommands.ListGroup;
-import lee.code.tcf.commands.subcommands.Reload;
-import lee.code.tcf.commands.subcommands.RemoveGroup;
-import lee.code.tcf.files.defaults.Lang;
+import lee.code.tcf.commands.subcommands.AddCMD;
+import lee.code.tcf.commands.subcommands.ListCMD;
+import lee.code.tcf.commands.subcommands.ReloadCMD;
+import lee.code.tcf.commands.subcommands.RemoveCMD;
+import lee.code.tcf.files.files.FileLang;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import lombok.Getter;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CommandManager implements CommandExecutor {
-    @Getter public final ArrayList<SubCommand> subCommands = new ArrayList<>();
+    private final ArrayList<SubCommand> subCommands = new ArrayList<>();
 
     public CommandManager() {
-        subCommands.add(new Reload());
-        subCommands.add(new AddGroup());
-        subCommands.add(new RemoveGroup());
-        subCommands.add(new ListGroup());
+        subCommands.add(new ReloadCMD());
+        subCommands.add(new AddCMD());
+        subCommands.add(new RemoveCMD());
+        subCommands.add(new ListCMD());
     }
 
     @Override
-    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
-
-        TabCompleteFilter plugin = TabCompleteFilter.getPlugin();
-
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            Player p = (Player) sender;
-
+            Player player = (Player) sender;
             if (args.length > 0) {
-                for (int i = 0; i < getSubCommands().size(); i++) {
-                    if (args[0].equalsIgnoreCase(getSubCommands().get(i).getName())){
-                        //perm check for sub command
-                        if (p.hasPermission(getSubCommands().get(i).getPermission())) getSubCommands().get(i).perform(p, args);
-                        else p.sendMessage(Lang.PREFIX.getConfigValue(null) + Lang.ERROR_NO_PERMISSION.getConfigValue(null));
+                for (SubCommand subCommand : subCommands) {
+                    if (args[0].equalsIgnoreCase(subCommand.getName())) {
+                        if (player.hasPermission(subCommand.getPermission())) subCommand.perform(player, args);
+                        else player.sendMessage(FileLang.PREFIX.getString(null) + FileLang.ERROR_NO_PERMISSION.getString(null));
                         return true;
                     }
                 }
             }
-
-            //plugin info
-            int number = 1;
-            List<String> lines = new ArrayList<>();
-            lines.add(Lang.MESSAGE_HELP_DIVIDER.getConfigValue(null));
-            lines.add(Lang.MESSAGE_HELP_TITLE.getConfigValue(null));
-            lines.add("&r");
-
-            for (int i = 0; i < getSubCommands().size(); i++) {
-                //perm check
-                if (p.hasPermission(getSubCommands().get(i).getPermission())) {
-                    //add command to list
-                    lines.add(Lang.MESSAGE_HELP_SUB_COMMAND.getConfigValue(new String [] { String.valueOf(number), getSubCommands().get(i).getSyntax(), getSubCommands().get(i).getDescription() }));
-                    number++;
-                }
-            }
-            lines.add("&r");
-            lines.add(Lang.MESSAGE_HELP_DIVIDER.getConfigValue(null));
-
-            for (String line : lines) p.sendMessage(plugin.getPU().format(line));
-            return true;
-
-        }
-        //console command
-        if (args.length > 0) {
-            for (int i = 0; i < getSubCommands().size(); i++) {
-                if (args[0].equalsIgnoreCase(getSubCommands().get(i).getName())) {
-                    getSubCommands().get(i).performConsole(sender, args);
+            sendHelpMessage(player);
+        } else if (args.length > 0) {
+            for (SubCommand subCommand : subCommands) {
+                if (args[0].equalsIgnoreCase(subCommand.getName())) {
+                    subCommand.performConsole(sender, args);
                     return true;
                 }
             }
-
         }
         return true;
+    }
+
+    public void sendHelpMessage(Player player) {
+        int number = 1;
+        List<TextComponent> lines = new ArrayList<>();
+        lines.add(FileLang.COMMAND_HELP_DIVIDER.getTextComponent(null));
+        lines.add(FileLang.COMMAND_HELP_TITLE.getTextComponent(null));
+        lines.add(new TextComponent(""));
+
+        for (SubCommand subCommand : subCommands) {
+            if (player.hasPermission(subCommand.getPermission())) {
+                String suggestCommand = subCommand.getSyntax().contains(" ") ? subCommand.getSyntax().split(" ")[0] : subCommand.getSyntax();
+                TextComponent helpSubCommand = FileLang.COMMAND_HELP_SUB_COMMAND.getTextComponent(new String[] { String.valueOf(number), subCommand.getSyntax() });
+                helpSubCommand.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, suggestCommand));
+                helpSubCommand.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(FileLang.COMMAND_HELP_SUB_COMMAND_HOVER.getString(new String[] { subCommand.getDescription() })).create()));
+                lines.add(helpSubCommand);
+                number++;
+            }
+        }
+        lines.add(new TextComponent(""));
+        lines.add(FileLang.COMMAND_HELP_DIVIDER.getTextComponent(null));
+        for (TextComponent line : lines) player.spigot().sendMessage(line);
     }
 }

@@ -6,5 +6,5 @@ author: Lee
 
 commands:
   tcf:
-    description: Use the tcf command.
+    description: Main command for the plugin.
     permission: tcf.command.use

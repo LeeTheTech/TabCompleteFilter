@@ -1,45 +1,75 @@
 package lee.code.tcf;
 
+import lee.code.tcf.files.CustomYML;
+import lee.code.tcf.files.FileManager;
+import lee.code.tcf.files.files.File;
+import lee.code.tcf.files.files.FileLang;
 import lombok.Getter;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Data {
 
-    private final ConcurrentHashMap<String, List<String>> groupList = new ConcurrentHashMap<>();
-    public List<String> getGroupList(String group) {
-        return groupList.get(group);
-    }
-    @Getter private final List<String> groups = new ArrayList<>();
+    private final ConcurrentHashMap<String, ArrayList<String>> groupData = new ConcurrentHashMap<>();
 
-    private void addGroupList(String group, List<String> commands) {
-        groupList.put(group, commands);
-    }
-    private void addGroup(String group) {
-        groups.add(group);
+    @Getter private final ArrayList<String> allGroups = new ArrayList<>();
+
+    public ArrayList<String> getGroupCommands(String group) {
+        return groupData.get(group);
     }
 
-    //load whitelist data
-    public void loadData() {
-        TabCompleteFilter plugin = TabCompleteFilter.getPlugin();
+    public void addGroupCommand(String group, String command) {
+        groupData.get(group).add(command);
+    }
 
-        groups.clear();
-        groupList.clear();
+    public void removeGroupCommand(String group, String command) {
+        groupData.get(group).remove(command);
+    }
 
-        FileConfiguration file = plugin.getFile("config").getData();
-        if (file.contains("Groups")) {
-            ConfigurationSection groups = file.getConfigurationSection("Groups");
-            if (groups != null) {
-                for (String key : groups.getKeys(false)) {
-                    List<String> commands = new ArrayList<>(file.getStringList("Groups." + key + ".Commands"));
-                    addGroupList(key, commands);
-                    addGroup(key);
+    public String getPlayerGroup(Player player) {
+        for (String group : getAllGroups()) {
+            if (player.hasPermission("tcf." + group)) return group;
+        }
+        return null;
+    }
+
+    public void load() {
+        loadFiles();
+    }
+
+    private void loadFiles() {
+        loadFile(File.LANG.name().toLowerCase(), File.LANG);
+        loadFile(File.CONFIG.name().toLowerCase(), File.CONFIG);
+    }
+
+    private void loadFile(String config, File file) {
+        FileManager fileManager = TabCompleteFilter.getPlugin().getFileManager();
+        fileManager.createYML(config);
+        CustomYML customYML = fileManager.getYML(config);
+        YamlConfiguration yaml = customYML.getFile();
+
+        switch (file) {
+            case CONFIG: {
+                ConfigurationSection groups = yaml.getConfigurationSection("groups");
+                if (groups == null) return;
+                groups.getKeys(false).forEach(group -> {
+                    groupData.put(group, new ArrayList<>(groups.getStringList(group)));
+                    allGroups.add(group);
+                });
+                break;
+            }
+
+            case LANG: {
+                for (FileLang value : FileLang.values()) {
+                    if (!yaml.contains(value.getPath())) yaml.set(value.getPath(), value.getString());
                 }
+                break;
             }
         }
+        customYML.saveFile();
     }
 }
