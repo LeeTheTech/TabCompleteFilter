@@ -13,14 +13,12 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
-import javax.annotation.Nonnull;
-
 public class TabCompletion implements TabCompleter {
 
     private final List<String> subCommands = Arrays.asList("reload", "add", "remove", "list");
     private final List<String> blank = new ArrayList<>();
 
-    public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String alias, @Nonnull String[] args) {
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         Data data = TabCompleteFilter.getPlugin().getData();
         if (sender instanceof Player) {
             if (args.length == 1) {

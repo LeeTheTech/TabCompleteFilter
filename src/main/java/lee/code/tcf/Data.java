@@ -38,6 +38,11 @@ public class Data {
     }
 
     public void load() {
+        //clear maps for reloads
+        allGroups.clear();
+        groupData.clear();
+
+        //load files
         loadFiles();
     }
 
