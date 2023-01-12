@@ -8,6 +8,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandSendEvent;
 
+import java.util.ArrayList;
+
 public class FilterListener implements Listener {
 
     @EventHandler (priority = EventPriority.LOWEST)
@@ -17,8 +19,10 @@ public class FilterListener implements Listener {
         if (player.isOp()) return;
         if (player.hasPermission("tcf.bypass")) return;
         e.getCommands().clear();
-        String group = data.getPlayerGroup(player);
-        if (group == null) return;
-        for (String command : data.getGroupCommands(group)) e.getCommands().add(command.replaceFirst("/", ""));
+        ArrayList<String> groups = data.getPlayerGroup(player);
+        if (groups.isEmpty()) return;
+        for (String group : groups) {
+            for (String command : data.getGroupCommands(group)) e.getCommands().add(command.replaceFirst("/", ""));
+        }
     }
 }

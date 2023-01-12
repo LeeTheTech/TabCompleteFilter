@@ -30,11 +30,14 @@ public class Data {
         groupData.get(group).remove(command);
     }
 
-    public String getPlayerGroup(Player player) {
+    public ArrayList<String> getPlayerGroup(Player player) {
+        ArrayList<String> groups = new ArrayList<>();
         for (String group : getAllGroups()) {
-            if (player.hasPermission("tcf." + group)) return group;
+            if (player.hasPermission("tcf." + group)) {
+                groups.add(group);
+            }
         }
-        return null;
+        return groups;
     }
 
     public void load() {
