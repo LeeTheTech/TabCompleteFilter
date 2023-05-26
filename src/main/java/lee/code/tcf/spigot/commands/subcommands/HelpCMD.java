@@ -6,6 +6,9 @@ import lee.code.tcf.spigot.files.files.FileLang;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HelpCMD extends SubCommand {
 
     @Override
@@ -30,11 +33,21 @@ public class HelpCMD extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        TabCompleteFilter.getPlugin().getCommandManager().sendHelpMessage(player);
+        performSender(player, args);
     }
 
     @Override
     public void performConsole(CommandSender console, String[] args) {
-        console.sendMessage(FileLang.PREFIX.getString(null) + FileLang.ERROR_NOT_A_CONSOLE_COMMAND.getString(null));
+       performSender(console, args);
+    }
+
+    @Override
+    public void performSender(CommandSender sender, String[] args) {
+        TabCompleteFilter.getPlugin().getCommandManager().sendHelpMessage(sender);
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, String[] args) {
+        return new ArrayList<>();
     }
 }

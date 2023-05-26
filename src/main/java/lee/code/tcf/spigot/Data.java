@@ -11,39 +11,36 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class Data {
 
-    private final ConcurrentHashMap<String, ArrayList<String>> groupData = new ConcurrentHashMap<>();
+    @Getter private final ConcurrentHashMap<String, ArrayList<String>> groupData = new ConcurrentHashMap<>();
 
     @Getter private final ArrayList<String> allGroups = new ArrayList<>();
 
     public ArrayList<String> getGroupCommands(String group) {
-        return groupData.get(group);
+        return getGroupData().get(group);
     }
 
     public void addGroupCommand(String group, String command) {
-        groupData.get(group).add(command);
+        getGroupData().get(group).add(command);
     }
 
     public void removeGroupCommand(String group, String command) {
-        groupData.get(group).remove(command);
+        getGroupData().get(group).remove(command);
     }
 
     public ArrayList<String> getPlayerGroup(Player player) {
-        ArrayList<String> groups = new ArrayList<>();
-        for (String group : getAllGroups()) {
-            if (player.hasPermission("tcf." + group)) {
-                groups.add(group);
-            }
-        }
-        return groups;
+        return getAllGroups().stream()
+                .filter(group -> player.hasPermission("tcf." + group))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public void load() {
         //clear maps for reloads
-        allGroups.clear();
-        groupData.clear();
+        getAllGroups().clear();
+        getGroupData().clear();
 
         //load files
         loadFiles();
@@ -55,18 +52,18 @@ public class Data {
     }
 
     private void loadFile(String config, File file) {
-        FileManager fileManager = TabCompleteFilter.getPlugin().getFileManager();
+        final FileManager fileManager = TabCompleteFilter.getPlugin().getFileManager();
         fileManager.createYML(config);
-        CustomYML customYML = fileManager.getYML(config);
-        YamlConfiguration yaml = customYML.getFile();
+        final CustomYML customYML = fileManager.getYML(config);
+        final YamlConfiguration yaml = customYML.getYamlFile();
 
         switch (file) {
             case CONFIG: {
-                ConfigurationSection groups = yaml.getConfigurationSection("groups");
+                final ConfigurationSection groups = yaml.getConfigurationSection("groups");
                 if (groups == null) return;
                 groups.getKeys(false).forEach(group -> {
-                    groupData.put(group, new ArrayList<>(groups.getStringList(group)));
-                    allGroups.add(group);
+                    getGroupData().put(group, new ArrayList<>(groups.getStringList(group)));
+                    getAllGroups().add(group);
                 });
                 break;
             }
@@ -78,6 +75,6 @@ public class Data {
                 break;
             }
         }
-        customYML.saveFile();
+        customYML.saveYamlFile();
     }
 }

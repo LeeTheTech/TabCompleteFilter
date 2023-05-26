@@ -19,8 +19,7 @@ public class TabCompleteFilter extends JavaPlugin {
         this.data = new Data();
         this.commandManager = new CommandManager();
 
-        data.load();
-
+        getData().load();
         registerListeners();
         registerCommands();
     }

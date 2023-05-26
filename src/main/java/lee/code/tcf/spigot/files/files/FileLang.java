@@ -45,10 +45,10 @@ public enum FileLang {
     @Getter private final String string;
 
     public String getString(String[] variables) {
-        return TabCompleteFilter.getPlugin().getFileManager().getStringFromFile(File.LANG.name().toLowerCase(), path, variables);
+        return TabCompleteFilter.getPlugin().getFileManager().getStringFromFile(File.LANG.name().toLowerCase(), getPath(), variables);
     }
 
     public TextComponent getTextComponent(String[] variables) {
-        return new TextComponent(TabCompleteFilter.getPlugin().getFileManager().getStringFromFile(File.LANG.name().toLowerCase(), path, variables));
+        return new TextComponent(TabCompleteFilter.getPlugin().getFileManager().getStringFromFile(File.LANG.name().toLowerCase(), getPath(), variables));
     }
 }

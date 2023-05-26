@@ -6,6 +6,9 @@ import lee.code.tcf.spigot.files.files.FileLang;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ReloadCMD extends SubCommand {
 
     @Override
@@ -30,13 +33,22 @@ public class ReloadCMD extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        TabCompleteFilter.getPlugin().getData().load();
-        player.sendMessage(FileLang.PREFIX.getString(null) + FileLang.COMMAND_RELOAD_SUCCESSFUL.getString(null));
+        performSender(player, args);
     }
 
     @Override
     public void performConsole(CommandSender console, String[] args) {
+        performSender(console, args);
+    }
+
+    @Override
+    public void performSender(CommandSender sender, String[] args) {
         TabCompleteFilter.getPlugin().getData().load();
-        console.sendMessage(FileLang.PREFIX.getString(null) + FileLang.COMMAND_RELOAD_SUCCESSFUL.getString(null));
+        sender.sendMessage(FileLang.PREFIX.getString(null) + FileLang.COMMAND_RELOAD_SUCCESSFUL.getString(null));
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, String[] args) {
+        return new ArrayList<>();
     }
 }
