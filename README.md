@@ -2,7 +2,7 @@
 
 ## Wiki
 
-Guides and info about this plugins can be found on our [Wiki](https://lees-plugins.gitbook.io/tabcompletefilter/).
+Guides and info about this plugin can be found on our [Wiki](https://lees-plugins.gitbook.io/tabcompletefilter/).
 
 ## Support
 
