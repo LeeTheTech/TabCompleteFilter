@@ -20,8 +20,8 @@ public class FilterListener implements Listener {
 
     @EventHandler (priority = EventPriority.LOWEST)
     public void onTabCompleteResponse(ProxyDefineCommandsEvent e) {
-        if (e.getSender() instanceof ProxiedPlayer proxiedPlayer) {
-            if (proxiedPlayer.hasPermission("group.admin")) return;
+        if (e.getReceiver() instanceof ProxiedPlayer proxiedPlayer) {
+            if (proxiedPlayer.getGroups().contains("admin")) return;
             final Set<String> whitelist = new HashSet<>(getPlugin().getConfigManager().getWhiteList());
             final Map<String, Command> filteredCommands = new HashMap<>();
 
@@ -35,5 +35,4 @@ public class FilterListener implements Listener {
             e.getCommands().putAll(filteredCommands);
         }
     }
-
 }
