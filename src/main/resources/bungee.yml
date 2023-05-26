@@ -1,0 +1,5 @@
+name: TabCompleteFilter
+main: lee.code.tcf.bungee.TabCompleteFilter
+version: ${version}
+api-version: 1.13
+author: Lee

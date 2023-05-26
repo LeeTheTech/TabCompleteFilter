@@ -1,6 +1,6 @@
-package lee.code.tcf.files.files;
+package lee.code.tcf.spigot.files.files;
 
-import lee.code.tcf.TabCompleteFilter;
+import lee.code.tcf.spigot.TabCompleteFilter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import net.md_5.bungee.api.chat.TextComponent;

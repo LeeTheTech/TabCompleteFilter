@@ -1,9 +1,9 @@
-package lee.code.tcf.files;
+package lee.code.tcf.spigot.files;
 
 import java.io.*;
 import java.util.logging.Level;
 
-import lee.code.tcf.TabCompleteFilter;
+import lee.code.tcf.spigot.TabCompleteFilter;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 

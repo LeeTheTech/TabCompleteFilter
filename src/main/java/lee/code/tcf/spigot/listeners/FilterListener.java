@@ -1,7 +1,7 @@
-package lee.code.tcf.listeners;
+package lee.code.tcf.spigot.listeners;
 
-import lee.code.tcf.Data;
-import lee.code.tcf.TabCompleteFilter;
+import lee.code.tcf.spigot.Data;
+import lee.code.tcf.spigot.TabCompleteFilter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

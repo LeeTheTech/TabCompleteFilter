@@ -1,10 +1,10 @@
-package lee.code.tcf.files;
+package lee.code.tcf.spigot.files;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-import lee.code.tcf.Core;
-import lee.code.tcf.TabCompleteFilter;
-import lee.code.tcf.files.files.File;
+import lee.code.tcf.spigot.Core;
+import lee.code.tcf.spigot.TabCompleteFilter;
+import lee.code.tcf.spigot.files.files.File;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public class FileManager {

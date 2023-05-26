@@ -1,9 +1,9 @@
-package lee.code.tcf;
+package lee.code.tcf.spigot;
 
-import lee.code.tcf.files.CustomYML;
-import lee.code.tcf.files.FileManager;
-import lee.code.tcf.files.files.File;
-import lee.code.tcf.files.files.FileLang;
+import lee.code.tcf.spigot.files.CustomYML;
+import lee.code.tcf.spigot.files.FileManager;
+import lee.code.tcf.spigot.files.files.File;
+import lee.code.tcf.spigot.files.files.FileLang;
 import lombok.Getter;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;

@@ -1,4 +1,4 @@
-package lee.code.tcf;
+package lee.code.tcf.spigot;
 
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;

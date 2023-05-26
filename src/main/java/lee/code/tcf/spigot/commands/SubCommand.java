@@ -1,4 +1,4 @@
-package lee.code.tcf.commands;
+package lee.code.tcf.spigot.commands;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

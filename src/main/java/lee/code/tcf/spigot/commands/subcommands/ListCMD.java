@@ -1,10 +1,10 @@
-package lee.code.tcf.commands.subcommands;
+package lee.code.tcf.spigot.commands.subcommands;
 
-import lee.code.tcf.Core;
-import lee.code.tcf.Data;
-import lee.code.tcf.TabCompleteFilter;
-import lee.code.tcf.commands.SubCommand;
-import lee.code.tcf.files.files.FileLang;
+import lee.code.tcf.spigot.Core;
+import lee.code.tcf.spigot.Data;
+import lee.code.tcf.spigot.TabCompleteFilter;
+import lee.code.tcf.spigot.commands.SubCommand;
+import lee.code.tcf.spigot.files.files.FileLang;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;

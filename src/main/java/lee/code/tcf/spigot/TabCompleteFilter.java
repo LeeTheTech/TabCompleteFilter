@@ -1,9 +1,9 @@
-package lee.code.tcf;
+package lee.code.tcf.spigot;
 
-import lee.code.tcf.commands.CommandManager;
-import lee.code.tcf.commands.TabCompletion;
-import lee.code.tcf.files.FileManager;
-import lee.code.tcf.listeners.FilterListener;
+import lee.code.tcf.spigot.commands.CommandManager;
+import lee.code.tcf.spigot.commands.TabCompletion;
+import lee.code.tcf.spigot.files.FileManager;
+import lee.code.tcf.spigot.listeners.FilterListener;
 import org.bukkit.plugin.java.JavaPlugin;
 import lombok.Getter;
 

@@ -1,12 +1,12 @@
-package lee.code.tcf.commands;
+package lee.code.tcf.spigot.commands;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import lee.code.tcf.Data;
-import lee.code.tcf.TabCompleteFilter;
+import lee.code.tcf.spigot.Data;
+import lee.code.tcf.spigot.TabCompleteFilter;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;

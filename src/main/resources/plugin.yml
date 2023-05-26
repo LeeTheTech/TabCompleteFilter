@@ -1,9 +1,8 @@
 name: TabCompleteFilter
-main: lee.code.tcf.TabCompleteFilter
-version: ${project.version}
+main: lee.code.tcf.spigot.TabCompleteFilter
+version: ${version}
 api-version: 1.13
 author: Lee
-
 commands:
   tcf:
     description: Main command for the plugin.

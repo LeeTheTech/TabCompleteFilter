@@ -1,8 +1,8 @@
-package lee.code.tcf.commands.subcommands;
+package lee.code.tcf.spigot.commands.subcommands;
 
-import lee.code.tcf.TabCompleteFilter;
-import lee.code.tcf.commands.SubCommand;
-import lee.code.tcf.files.files.FileLang;
+import lee.code.tcf.spigot.TabCompleteFilter;
+import lee.code.tcf.spigot.commands.SubCommand;
+import lee.code.tcf.spigot.files.files.FileLang;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 

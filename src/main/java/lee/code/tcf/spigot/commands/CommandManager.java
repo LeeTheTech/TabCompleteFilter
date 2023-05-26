@@ -1,10 +1,10 @@
-package lee.code.tcf.commands;
+package lee.code.tcf.spigot.commands;
 
-import lee.code.tcf.commands.subcommands.AddCMD;
-import lee.code.tcf.commands.subcommands.ListCMD;
-import lee.code.tcf.commands.subcommands.ReloadCMD;
-import lee.code.tcf.commands.subcommands.RemoveCMD;
-import lee.code.tcf.files.files.FileLang;
+import lee.code.tcf.spigot.commands.subcommands.AddCMD;
+import lee.code.tcf.spigot.commands.subcommands.ListCMD;
+import lee.code.tcf.spigot.commands.subcommands.ReloadCMD;
+import lee.code.tcf.spigot.commands.subcommands.RemoveCMD;
+import lee.code.tcf.spigot.files.files.FileLang;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
