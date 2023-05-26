@@ -9,13 +9,13 @@ configurations {
 }
 
 group = 'lee.code.tcf'
-version = '1.2'
+version = '1.2.0'
 
 repositories {
     mavenCentral()
     maven {
-        name = 'bungeecord-repo'
-        url = 'https://oss.sonatype.org/content/repositories/snapshots'
+        name = 'waterfall-repo'
+        url = 'https://repo.papermc.io/repository/maven-public/'
     }
     maven {
         name = 'spigotmc-repo'
@@ -34,7 +34,7 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.28'
 
     compileOnly 'org.spigotmc:spigot-api:1.19.4-R0.1-SNAPSHOT'
-    compileOnly 'net.md-5:bungeecord-api:1.19-R0.1-SNAPSHOT'
+    compileOnly 'io.github.waterfallmc:waterfall-api:1.19-R0.1-SNAPSHOT'
 }
 
 def targetJavaVersion = 16

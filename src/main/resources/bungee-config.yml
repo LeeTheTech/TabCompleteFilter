@@ -1,0 +1,4 @@
+# Input all the commands you want to allow users to see that are registered to the proxy
+# To filter spigot server commands, you need to install this plugin on each server and give the user the correct group perm
+whitelist:
+    - /server
