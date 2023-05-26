@@ -1,9 +1,5 @@
 [![EssentialsX](https://i.imgur.com/uCl2hUN.png)](https://essentialsx.net)
 
-## License
-
-[GPLv3](https://www.gnu.org/licenses/gpl-3.0.txt)
-
 ## Wiki
 
 Guides and info about this plugins can be found on our [Wiki](https://lees-plugins.gitbook.io/tabcompletefilter/).
@@ -24,5 +20,11 @@ Clone this repository, then run the following command:
 * On Windows: `gradlew build`
 
 ## Minecraft Versions Supported
+
 [Spigot](https://www.spigotmc.org/) - [Paper](https://papermc.io/software/paper) - [Bungeecord/WaterFall](https://papermc.io/software/waterfall)
+
 `1.13.x|1.14.x|1.16.x|1.17.x|1.18.x|1.19.x`
+
+## License
+
+[GPLv3](https://www.gnu.org/licenses/gpl-3.0.txt)
