@@ -6,6 +6,7 @@ import lombok.Getter;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
+import net.md_5.bungee.event.EventPriority;
 
 import java.util.*;
 
@@ -16,7 +17,7 @@ public class FilterListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler
+    @EventHandler (priority = EventPriority.LOWEST)
     public void onTabCompleteResponse(ProxyDefineCommandsEvent e) {
         final Set<String> whitelist = new HashSet<>(getPlugin().getConfigManager().getWhiteList());
         final Map<String, Command> filteredCommands = new HashMap<>();
