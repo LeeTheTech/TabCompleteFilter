@@ -8,9 +8,9 @@ import lee.code.tcf.spigot.commands.subcommands.RemoveCMD;
 import lee.code.tcf.spigot.files.files.FileLang;
 import lombok.Getter;
 import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -53,6 +53,7 @@ public class CommandManager implements CommandExecutor {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     public void sendHelpMessage(CommandSender sender) {
         int number = 1;
         final List<TextComponent> lines = new ArrayList<>();
@@ -65,7 +66,7 @@ public class CommandManager implements CommandExecutor {
                 final String suggestCommand = Core.getTextBeforeCharacter(subCommand.getSyntax(), '&');
                 final TextComponent helpSubCommand = FileLang.COMMAND_HELP_SUB_COMMAND.getTextComponent(new String[] { String.valueOf(number), subCommand.getSyntax() });
                 helpSubCommand.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, suggestCommand));
-                helpSubCommand.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(FileLang.COMMAND_HELP_SUB_COMMAND_HOVER.getString(new String[] { subCommand.getDescription() }))));
+                helpSubCommand.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(FileLang.COMMAND_HELP_SUB_COMMAND_HOVER.getString(new String[] { subCommand.getDescription() })).create()));
                 lines.add(helpSubCommand);
                 number++;
             }

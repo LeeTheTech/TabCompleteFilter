@@ -38,7 +38,7 @@ public class ListCMD extends SubCommand {
         return "tcf.command.list";
     }
 
-    @Override
+    @Override @SuppressWarnings("deprecation")
     public void perform(Player player, String[] args) {
         final Data data = TabCompleteFilter.getPlugin().getData();
         if (args.length > 1) {
@@ -51,7 +51,8 @@ public class ListCMD extends SubCommand {
             int index;
             int page = 0;
             if (args.length > 2) {
-                if (Core.containOnlyIntNumbers(args[2])) {
+                if (Core.containOnlyNumbers(args[2])) {
+                    if (Integer.parseInt(args[2]) < 0) return;
                     page = Integer.parseInt(args[2]);
                 } else {
                     player.sendMessage(FileLang.PREFIX.getString(null) + FileLang.ERROR_COMMAND_LIST_PAGE.getString(new String[]{ args[2]} ));
@@ -63,7 +64,10 @@ public class ListCMD extends SubCommand {
             final List<TextComponent> lines = new ArrayList<>();
             final List<String> commands = data.getGroupCommands(group);
             if (commands != null && !commands.isEmpty()) {
-                lines.add(FileLang.COMMAND_LIST_HEADER.getTextComponent(new String[] { group.toUpperCase() }));
+                lines.add(FileLang.COMMAND_LIST_HEADER_SPLITTER.getTextComponent(null));
+                lines.add(new TextComponent(""));
+                lines.add(FileLang.COMMAND_LIST_HEADER_GROUP.getTextComponent(new String[] { group }));
+                lines.add(new TextComponent(""));
                 for (int i = 0; i < maxDisplayed; i++) {
                     index = maxDisplayed * page + i;
                     if (index >= commands.size()) break;
@@ -75,7 +79,8 @@ public class ListCMD extends SubCommand {
                 }
             }
 
-            if (lines.size() < 2) return;
+            if (lines.size() < 5) return;
+            lines.add(new TextComponent(""));
 
             final TextComponent next = FileLang.COMMAND_LIST_NEXT_PAGE.getTextComponent(null);
             next.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(FileLang.COMMAND_LIST_NEXT_PAGE_HOVER.getString(null)).create()));

@@ -43,8 +43,8 @@ public class Core {
         return getMcVersion() >= version;
     }
 
-    public static boolean containOnlyIntNumbers(String string) {
-        return string.matches("[0-9]+");
+    public static boolean containOnlyNumbers(String string) {
+        return string.matches("-?\\d+");
     }
 
     public static String getTextBeforeCharacter(String input, char character) {

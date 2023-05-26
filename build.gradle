@@ -72,6 +72,10 @@ artifacts {
     archives shadowJar
 }
 
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
+}
+
 processResources {
     inputs.property("version", project.version)
     outputs.dir(destinationDir)
