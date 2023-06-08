@@ -4,54 +4,55 @@ import java.io.*;
 import java.util.logging.Level;
 
 import lee.code.tcf.spigot.TabCompleteFilter;
-import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 public class CustomYML extends FileManager {
 
-    @Getter private final File file;
-    @Getter private final File path;
-    @Getter private YamlConfiguration yamlConfiguration;
+    private final File file;
+    private final File path;
+    private YamlConfiguration yamlConfiguration;
 
+    /**
+     * Custom yml file constructor
+     * @param name Name of file.
+     * @param path Path for file.
+     * @param plugin The plugin using the file manager.
+     */
     public CustomYML(String name, String path, TabCompleteFilter plugin) {
         super(plugin);
         this.file = new File(plugin.getDataFolder(), name);
         this.path = new File(plugin.getDataFolder() + path);
-        createYamlFile();
+        createFile();
     }
 
-    public void reloadYamlFile() {
-        yamlConfiguration = YamlConfiguration.loadConfiguration(getFile());
-    }
+    public void reloadFile() { yamlConfiguration = YamlConfiguration.loadConfiguration(file);}
 
-    public YamlConfiguration getYamlFile() {
-        return getYamlConfiguration();
-    }
+    public YamlConfiguration getFile() { return yamlConfiguration; }
 
-    public void saveYamlFile() {
+    public void saveFile() {
         try {
-            getYamlConfiguration().save(getFile());
+            yamlConfiguration.save(file);
         } catch (IOException e) {
-            Bukkit.getLogger().log(Level.WARNING,"Failed to save file: " + getFile().getName());
+            Bukkit.getLogger().log(Level.WARNING,"Failed to save file: " + file.getName());
         }
     }
 
-    private void createYamlFile() {
-        if (!getPath().exists()) {
+    private void createFile() {
+        if (!path.exists()) {
             try {
-                boolean createdDir = getPath().mkdir();
+                boolean createdDir = path.mkdir();
             } catch(SecurityException e) {
-                Bukkit.getLogger().log(Level.WARNING,"Failed to create directory for file: " + getFile().getName());
+                Bukkit.getLogger().log(Level.WARNING,"Failed to create directory for file: " + file.getName());
             }
         }
-        if (!getFile().exists()) {
+        if (!file.exists()) {
             try {
-                getPlugin().saveResource(getFile().getName(), false);
+                plugin.saveResource(file.getName(), false);
             } catch(Exception e) {
-                Bukkit.getLogger().log(Level.WARNING,"Failed to create file: " + getFile().getName());
+                Bukkit.getLogger().log(Level.WARNING,"Failed to create file: " + file.getName());
             }
         }
-        reloadYamlFile();
+        reloadFile();
     }
 }

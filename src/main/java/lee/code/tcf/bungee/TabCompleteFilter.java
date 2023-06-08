@@ -11,7 +11,7 @@ public class TabCompleteFilter extends Plugin {
 
     @Override
     public void onEnable() {
-        configManager = new ConfigManager(this);
+        this.configManager = new ConfigManager(this);
 
         getConfigManager().loadConfig();
         getProxy().getPluginManager().registerListener(this, new FilterListener(this));

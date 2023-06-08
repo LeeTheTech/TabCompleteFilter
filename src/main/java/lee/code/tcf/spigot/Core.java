@@ -3,7 +3,11 @@ package lee.code.tcf.spigot;
 import lombok.Getter;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,4 +56,13 @@ public class Core {
         if (index == -1) return input;
         else return input.substring(0, index);
     }
+
+    public static List<String> getOnlinePlayers() {
+        final List<String> players = new ArrayList<>();
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (!player.getGameMode().equals(GameMode.SPECTATOR)) players.add(player.getName());
+        }
+        return players;
+    }
+
 }

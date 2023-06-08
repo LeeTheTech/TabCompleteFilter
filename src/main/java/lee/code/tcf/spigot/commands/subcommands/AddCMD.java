@@ -1,6 +1,6 @@
 package lee.code.tcf.spigot.commands.subcommands;
 
-import lee.code.tcf.spigot.Data;
+import lee.code.tcf.spigot.data.Data;
 import lee.code.tcf.spigot.TabCompleteFilter;
 import lee.code.tcf.spigot.commands.SubCommand;
 import lee.code.tcf.spigot.files.FileManager;

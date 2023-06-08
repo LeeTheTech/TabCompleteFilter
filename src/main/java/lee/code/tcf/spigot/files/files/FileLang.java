@@ -40,6 +40,7 @@ public enum FileLang {
     ERROR_NOT_A_CONSOLE_COMMAND("error_not_a_console_command", "&cThis is not a console command."),
     ERROR_COMMAND_NOT_A_COMMAND("error_command_not_a_command", "&cThe input &6{0} &cis not a command. You need to add a slash."),
     ERROR_COMMAND_ADD_DUPE("error_command_add_dupe", "&cThe command &6{0} &cis already set for the group &6{1}&c."),
+    ERROR_CUSTOM_TAB_COMPLETE_NOT_REGISTERED("error_custom_tab_complete_not_registered", "The command ({0}) is not registered so a custom tab-complete handler could not be set for this command."),
     ;
 
     @Getter private final String path;

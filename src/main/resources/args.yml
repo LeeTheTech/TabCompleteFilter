@@ -1,0 +1,27 @@
+# Here you can customize/create your own tab-completes for any registered command on your spigot/paper server!
+# The placeholder %online_players% will list all online players besides spectators.
+# If you enable permission-check you can input a permission to check for each arg, this can only work with
+# permissions that end with the arg.
+enabled: false
+custom-args:
+  '1':
+    permission-check: true
+    permission: 'essentials.warp.'
+    command: 'warp'
+    args:
+      '1':
+        - spawn
+        - wild
+  '2':
+    command: 'msg'
+    args:
+      '1':
+        - '%online_players%'
+      '2':
+        - This
+      '3':
+        - is
+      '4':
+        - a
+      '5':
+        - example!

@@ -1,6 +1,6 @@
 package lee.code.tcf.spigot.listeners;
 
-import lee.code.tcf.spigot.Data;
+import lee.code.tcf.spigot.data.Data;
 import lee.code.tcf.spigot.TabCompleteFilter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class FilterListener implements Listener {
 
-    @EventHandler (priority = EventPriority.LOWEST)
+    @EventHandler (priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onCommandTabShow(PlayerCommandSendEvent e) {
         final Data data = TabCompleteFilter.getPlugin().getData();
         final Player player = e.getPlayer();
