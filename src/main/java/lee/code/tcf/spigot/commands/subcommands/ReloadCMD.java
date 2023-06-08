@@ -2,6 +2,7 @@ package lee.code.tcf.spigot.commands.subcommands;
 
 import lee.code.tcf.spigot.TabCompleteFilter;
 import lee.code.tcf.spigot.commands.SubCommand;
+import lee.code.tcf.spigot.files.files.FileArgs;
 import lee.code.tcf.spigot.files.files.FileLang;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -44,6 +45,9 @@ public class ReloadCMD extends SubCommand {
     @Override
     public void performSender(CommandSender sender, String[] args) {
         TabCompleteFilter.getPlugin().getData().load();
+        if (FileArgs.ENABLED.getBoolean()) {
+            TabCompleteFilter.getPlugin().registerCustomTabCompletes();
+        }
         sender.sendMessage(FileLang.PREFIX.getString(null) + FileLang.COMMAND_RELOAD_SUCCESSFUL.getString(null));
     }
 

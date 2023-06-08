@@ -83,7 +83,6 @@ public class Data {
                 final ConfigurationSection commands = yaml.getConfigurationSection("custom-args");
                 if (commands == null) return;
                 commands.getKeys(false).forEach(commandID -> {
-                    System.out.println("command ID:" + commandID);
                     final ConfigurationSection id = commands.getConfigurationSection(commandID);
                     if (id == null) return;
                     final String command = id.getString("command");
