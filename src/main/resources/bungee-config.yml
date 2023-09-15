@@ -2,4 +2,4 @@
 # To filter spigot server commands, you need to install this plugin on each server and give the user the correct group perm
 # This ONLY works on Waterfall, Bungeecord by itself does not have an event listener for doing this
 whitelist:
-    - /server
+  - /server

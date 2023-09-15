@@ -7,11 +7,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.server.ServerLoadEvent;
 
 public class ServerLoadListener implements Listener {
+  private final TabCompleteFilter tabCompleteFilter;
 
-    @EventHandler
-    public void onServerLoad(ServerLoadEvent event) {
-        if (FileArgs.ENABLED.getBoolean()) {
-            TabCompleteFilter.getPlugin().registerCustomTabCompletes();
-        }
-    }
+  public ServerLoadListener(TabCompleteFilter tabCompleteFilter) {
+    this.tabCompleteFilter = tabCompleteFilter;
+  }
+
+  @EventHandler
+  public void onServerLoad(ServerLoadEvent event) {
+    if (FileArgs.ENABLED.getBoolean()) tabCompleteFilter.registerCustomTabCompletes();
+  }
 }

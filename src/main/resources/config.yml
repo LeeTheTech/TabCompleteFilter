@@ -1,23 +1,24 @@
 # Groups - Permission group for tcf.{group} (ex: tcf.default)
 # List of registered commands that will show in tab complete for group
 # The user will also need the perm for the command itself
+op-player-filter-bypass: false
 groups:
-    default:
-        - /help
-        - /msg
-        - /r
-        - /tell
-        - /tpa
-        - /tpaaccept
-        - /back
-        - /rules
-        - /afk
-        - /baltop
-        - /mail
-        - /stats
-        - /shop
-    mod:
-        - /ban
-        - /kick
-        - /mute
-        - //calculate
+  default:
+    - /help
+    - /msg
+    - /r
+    - /tell
+    - /tpa
+    - /tpaaccept
+    - /back
+    - /rules
+    - /afk
+    - /baltop
+    - /mail
+    - /stats
+    - /shop
+  mod:
+    - /ban
+    - /kick
+    - /mute
+    - //calculate

@@ -11,26 +11,27 @@ import net.md_5.bungee.event.EventPriority;
 import java.util.*;
 
 public class FilterListener implements Listener {
-    private final TabCompleteFilter plugin;
-    public FilterListener(TabCompleteFilter plugin) {
-        this.plugin = plugin;
-    }
+  private final TabCompleteFilter tabCompleteFilter;
 
-    @EventHandler (priority = EventPriority.LOWEST)
-    public void onTabCompleteResponse(ProxyDefineCommandsEvent e) {
-        if (e.getReceiver() instanceof ProxiedPlayer proxiedPlayer) {
-            if (proxiedPlayer.getGroups().contains("admin")) return;
-            final Set<String> whitelist = new HashSet<>(plugin.getConfigManager().getWhiteList());
-            final Map<String, Command> filteredCommands = new HashMap<>();
+  public FilterListener(TabCompleteFilter tabCompleteFilter) {
+    this.tabCompleteFilter = tabCompleteFilter;
+  }
 
-            for (Command command : e.getCommands().values()) {
-                if (whitelist.contains("/" + command.getName())) {
-                    filteredCommands.put(command.getName(), command);
-                }
-            }
+  @EventHandler(priority = EventPriority.LOWEST)
+  public void onTabCompleteResponse(ProxyDefineCommandsEvent e) {
+    if (e.getReceiver() instanceof ProxiedPlayer proxiedPlayer) {
+      if (proxiedPlayer.hasPermission("tcf.bypass")) return;
+      final Set<String> whitelist = new HashSet<>(tabCompleteFilter.getConfigManager().getWhiteList());
+      final Map<String, Command> filteredCommands = new HashMap<>();
 
-            e.getCommands().clear();
-            e.getCommands().putAll(filteredCommands);
+      for (Command command : e.getCommands().values()) {
+        if (whitelist.contains("/" + command.getName())) {
+          filteredCommands.put(command.getName(), command);
         }
+      }
+
+      e.getCommands().clear();
+      e.getCommands().putAll(filteredCommands);
     }
+  }
 }

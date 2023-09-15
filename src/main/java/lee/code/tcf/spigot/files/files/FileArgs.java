@@ -6,14 +6,14 @@ import lombok.Getter;
 
 @AllArgsConstructor
 public enum FileArgs {
-    ENABLED("enabled", "false"),
+  ENABLED("enabled", "false"),
 
-    ;
+  ;
 
-    @Getter private final String path;
-    @Getter private final String string;
+  @Getter private final String path;
+  @Getter private final String string;
 
-    public boolean getBoolean() {
-        return TabCompleteFilter.getPlugin().getFileManager().getBooleanFromFile(File.ARGS.name().toLowerCase(), path);
-    }
+  public boolean getBoolean() {
+    return TabCompleteFilter.getInstance().getFileManager().getBooleanFromFile(File.ARGS.name().toLowerCase(), path);
+  }
 }

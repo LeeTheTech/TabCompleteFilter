@@ -5,10 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 public enum PlaceHolders {
-
-    ONLINE_PLAYERS("%online_players%"),
-    ;
-
-
-    @Getter private final String placeholder;
+  ONLINE_PLAYERS("%online_players%"),
+  ;
+  @Getter private final String placeholder;
 }

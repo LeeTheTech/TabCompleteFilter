@@ -6,14 +6,13 @@ import lombok.Getter;
 import net.md_5.bungee.api.plugin.Plugin;
 
 public class TabCompleteFilter extends Plugin {
+  @Getter private ConfigManager configManager;
 
-    @Getter private ConfigManager configManager;
+  @Override
+  public void onEnable() {
+    this.configManager = new ConfigManager(this);
 
-    @Override
-    public void onEnable() {
-        this.configManager = new ConfigManager(this);
-
-        getConfigManager().loadConfig();
-        getProxy().getPluginManager().registerListener(this, new FilterListener(this));
-    }
+    getConfigManager().loadConfig();
+    getProxy().getPluginManager().registerListener(this, new FilterListener(this));
+  }
 }

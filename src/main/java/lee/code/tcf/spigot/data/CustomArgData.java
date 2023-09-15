@@ -8,7 +8,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 public class CustomArgData {
-    @Getter private final boolean permissionCheck;
-    @Getter private final String permission;
-    @Getter private final HashMap<Integer, List<String>> args;
+  @Getter private final boolean permissionCheck;
+  @Getter private final String permission;
+  @Getter private final HashMap<Integer, List<String>> args;
 }

@@ -11,48 +11,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReloadCMD extends SubCommand {
+  private final TabCompleteFilter tabCompleteFilter;
 
-    @Override
-    public String getName() {
-        return "reload";
-    }
+  public ReloadCMD(TabCompleteFilter tabCompleteFilter) {
+    this.tabCompleteFilter = tabCompleteFilter;
+  }
 
-    @Override
-    public String getDescription() {
-        return FileLang.COMMAND_RELOAD_DESCRIPTION.getString(null);
-    }
+  @Override
+  public String getName() {
+    return "reload";
+  }
 
-    @Override
-    public String getSyntax() {
-        return "/tcf reload";
-    }
+  @Override
+  public String getDescription() {
+    return FileLang.COMMAND_RELOAD_DESCRIPTION.getString(null);
+  }
 
-    @Override
-    public String getPermission() {
-        return "tcf.command.reload";
-    }
+  @Override
+  public String getSyntax() {
+    return "/tcf reload";
+  }
 
-    @Override
-    public void perform(Player player, String[] args) {
-        performSender(player, args);
-    }
+  @Override
+  public String getPermission() {
+    return "tcf.command.reload";
+  }
 
-    @Override
-    public void performConsole(CommandSender console, String[] args) {
-        performSender(console, args);
-    }
+  @Override
+  public void perform(Player player, String[] args) {
+    performSender(player, args);
+  }
 
-    @Override
-    public void performSender(CommandSender sender, String[] args) {
-        TabCompleteFilter.getPlugin().getData().load();
-        if (FileArgs.ENABLED.getBoolean()) {
-            TabCompleteFilter.getPlugin().registerCustomTabCompletes();
-        }
-        sender.sendMessage(FileLang.PREFIX.getString(null) + FileLang.COMMAND_RELOAD_SUCCESSFUL.getString(null));
-    }
+  @Override
+  public void performConsole(CommandSender console, String[] args) {
+    performSender(console, args);
+  }
 
-    @Override
-    public List<String> onTabComplete(CommandSender sender, String[] args) {
-        return new ArrayList<>();
-    }
+  @Override
+  public void performSender(CommandSender sender, String[] args) {
+    tabCompleteFilter.getData().load();
+    if (FileArgs.ENABLED.getBoolean()) tabCompleteFilter.registerCustomTabCompletes();
+    sender.sendMessage(FileLang.PREFIX.getString(null) + FileLang.COMMAND_RELOAD_SUCCESSFUL.getString(null));
+  }
+
+  @Override
+  public List<String> onTabComplete(CommandSender sender, String[] args) {
+    return new ArrayList<>();
+  }
 }

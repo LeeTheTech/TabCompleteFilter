@@ -1,6 +1,6 @@
 package lee.code.tcf.bungee.files;
 
-import net.md_5.bungee.api.plugin.Plugin;
+import lee.code.tcf.bungee.TabCompleteFilter;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
@@ -11,42 +11,42 @@ import java.nio.file.Files;
 import java.util.List;
 
 public class ConfigManager {
-    private final Plugin plugin;
-    private Configuration configuration;
-    private File configFile;
+  private final TabCompleteFilter tabCompleteFilter;
+  private Configuration configuration;
+  private File configFile;
 
-    public ConfigManager(Plugin plugin) {
-        this.plugin = plugin;
+  public ConfigManager(TabCompleteFilter tabCompleteFilter) {
+    this.tabCompleteFilter = tabCompleteFilter;
+  }
+
+  public void loadConfig() {
+    configFile = new File(tabCompleteFilter.getDataFolder(), "bungee-config.yml");
+
+    if (!configFile.exists()) {
+      tabCompleteFilter.getDataFolder().mkdirs();
+      try (InputStream inputStream = tabCompleteFilter.getResourceAsStream("bungee-config.yml")) {
+        Files.copy(inputStream, configFile.toPath());
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
 
-    public void loadConfig() {
-        configFile = new File(plugin.getDataFolder(), "bungee-config.yml");
-
-        if (!configFile.exists()) {
-            plugin.getDataFolder().mkdirs();
-            try (InputStream inputStream = plugin.getResourceAsStream("bungee-config.yml")) {
-                Files.copy(inputStream, configFile.toPath());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        try {
-            configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(configFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    try {
+      configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(configFile);
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+  }
 
-    public void saveConfig() {
-        try {
-            ConfigurationProvider.getProvider(YamlConfiguration.class).save(configuration, configFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+  public void saveConfig() {
+    try {
+      ConfigurationProvider.getProvider(YamlConfiguration.class).save(configuration, configFile);
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+  }
 
-     public List<String> getWhiteList() {
-        return configuration.getStringList("whitelist");
-    }
+  public List<String> getWhiteList() {
+    return configuration.getStringList("whitelist");
+  }
 }

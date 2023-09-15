@@ -1,88 +1,84 @@
 plugins {
-    id 'java'
-    id 'com.github.johnrengelman.shadow' version '7.0.0'
+  id 'java'
+  id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 configurations {
-    spigot
-    bungeecord
+  spigot
+  bungeecord
 }
 
 group = 'lee.code.tcf'
 version = '1.2.1'
 
 repositories {
-    mavenCentral()
-    maven {
-        name = 'waterfall-repo'
-        url = 'https://repo.papermc.io/repository/maven-public/'
-    }
-    maven {
-        name = 'spigotmc-repo'
-        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
-    }
-    maven {
-        name = 'sonatype'
-        url = 'https://oss.sonatype.org/content/groups/public/'
-    }
+  mavenCentral()
+  maven {
+    name = 'waterfall-repo'
+    url = 'https://repo.papermc.io/repository/maven-public/'
+  }
+  maven {
+    name = "spigotmc-repo"
+    url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+  }
 }
 
 dependencies {
-    compileOnly 'org.projectlombok:lombok:1.18.28'
-    annotationProcessor 'org.projectlombok:lombok:1.18.28'
-    testCompileOnly 'org.projectlombok:lombok:1.18.28'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.28'
+  compileOnly 'org.projectlombok:lombok:1.18.28'
+  annotationProcessor 'org.projectlombok:lombok:1.18.28'
+  testCompileOnly 'org.projectlombok:lombok:1.18.28'
+  testAnnotationProcessor 'org.projectlombok:lombok:1.18.28'
 
-    compileOnly 'org.spigotmc:spigot-api:1.20-R0.1-SNAPSHOT'
-    compileOnly 'io.github.waterfallmc:waterfall-api:1.20-R0.1-SNAPSHOT'
+  compileOnly 'org.spigotmc:spigot-api:1.20.1-R0.1-SNAPSHOT'
+  compileOnly 'io.github.waterfallmc:waterfall-api:1.20-R0.1-SNAPSHOT'
 }
 
 def targetJavaVersion = 16
 
 java {
-    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
-    sourceCompatibility = javaVersion
-    targetCompatibility = javaVersion
-    if (JavaVersion.current() < javaVersion) {
-        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
-    }
+  def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+  sourceCompatibility = javaVersion
+  targetCompatibility = javaVersion
+  if (JavaVersion.current() < javaVersion) {
+    toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+  }
 }
 
 tasks.withType(JavaCompile).configureEach {
-    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
-        options.release = targetJavaVersion
-    }
+  if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+    options.release = targetJavaVersion
+  }
 }
 
 shadowJar {
-    configurations = [project.configurations.spigot, project.configurations.bungeecord]
+  configurations = [project.configurations.spigot, project.configurations.bungeecord]
 
-    mergeServiceFiles()
+  mergeServiceFiles()
 
-    // Spigot-specific configuration
-    exclude 'bungeecord/**'
-    exclude 'net/minecraft/**'
+  // Spigot-specific configuration
+  exclude 'bungeecord/**'
+  exclude 'net/minecraft/**'
 
-    // BungeeCord-specific configuration
-    archiveClassifier.set('bungeecord')
-    relocate 'bungeecord', 'lee.code.tcf.bungee'
+  // BungeeCord-specific configuration
+  archiveClassifier.set('bungeecord')
+  relocate 'bungeecord', 'lee.code.tcf.bungee'
 }
 
 artifacts {
-    archives shadowJar
+  archives shadowJar
 }
 
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = "UTF-8"
+  options.encoding = "UTF-8"
 }
 
 processResources {
-    inputs.property("version", project.version)
-    outputs.dir(destinationDir)
-    from(sourceSets.main.resources.srcDirs) {
-        include 'plugin.yml'
-        include 'bungee.yml'
-        expand 'version': project.version
-    }
-    duplicatesStrategy = 'warn'
+  inputs.property("version", project.version)
+  outputs.dir(destinationDir)
+  from(sourceSets.main.resources.srcDirs) {
+    include 'plugin.yml'
+    include 'bungee.yml'
+    expand 'version': project.version
+  }
+  duplicatesStrategy = 'warn'
 }
