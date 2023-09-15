@@ -1,10 +1,7 @@
 package lee.code.tcf.spigot.commands;
 
 import lee.code.tcf.spigot.TabCompleteFilter;
-import lee.code.tcf.spigot.commands.subcommands.AddCMD;
-import lee.code.tcf.spigot.commands.subcommands.ListCMD;
-import lee.code.tcf.spigot.commands.subcommands.ReloadCMD;
-import lee.code.tcf.spigot.commands.subcommands.RemoveCMD;
+import lee.code.tcf.spigot.commands.subcommands.*;
 import lee.code.tcf.spigot.files.files.FileLang;
 import lombok.Getter;
 import org.bukkit.command.Command;
@@ -24,6 +21,7 @@ public class CommandManager implements CommandExecutor {
     storeSubCommand(new AddCMD(tabCompleteFilter));
     storeSubCommand(new RemoveCMD(tabCompleteFilter));
     storeSubCommand(new ListCMD(tabCompleteFilter));
+    storeSubCommand(new HelpCMD(tabCompleteFilter));
   }
 
   private void storeSubCommand(SubCommand subCommand) {
