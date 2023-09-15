@@ -9,7 +9,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 public enum FileLang {
   PREFIX("prefix", "&6&lTCF &e➔ &r"),
   COMMAND_HELP_DIVIDER("command_help_divider", "&a▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬"),
-  COMMAND_HELP_TITLE("command_help_title", "           &2-== &6&l&nTabCompleteFilter Help&r &2==-"),
+  COMMAND_HELP_TITLE("command_help_title", "             &2-== &6&l&nTabCompleteFilter Help&r &2==-"),
   COMMAND_HELP_SUB_COMMAND("command_help_sub_command", "&3{0}&b. &e{1}"),
   COMMAND_HELP_SUB_COMMAND_HOVER("command_help_sub_command_hover", "&6{0}"),
   COMMAND_RELOAD_SUCCESSFUL("command_reload_successful", "&aThe plugin has been reloaded."),
@@ -34,7 +34,6 @@ public enum FileLang {
   ERROR_COMMAND_REMOVE_DOES_NOT_EXIST("error_command_remove_does_not_exist", "&cThe command &6{0} &ccould not be found in the group &6{1}&c."),
   ERROR_COMMAND_ADD_ARG_1("error_command_add_arg_1", "&cYou need to select a group and input a command to add."),
   ERROR_COMMAND_ADD_ARG_2("error_command_add_arg_2", "&cYou need to input a command to add."),
-  ERROR_COMMAND_LIST_PAGE("error_command_list_page", "&cThe input &6{0} &cis not a number."),
   ERROR_GROUP_DOES_NOT_EXIST("error_group_does_not_exist", "&cThe group &6{0} &cdoes not exist."),
   ERROR_COMMAND_LIST_ARG_1("error_command_list_arg_1", "&cYou need to select a group."),
   ERROR_NOT_A_CONSOLE_COMMAND("error_not_a_console_command", "&cThis is not a console command."),

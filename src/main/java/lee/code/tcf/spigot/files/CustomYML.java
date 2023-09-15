@@ -12,10 +12,10 @@ public class CustomYML extends FileManager {
   private final File path;
   private YamlConfiguration yamlConfiguration;
 
-  public CustomYML(String name, String path, TabCompleteFilter plugin) {
-    super(plugin);
-    this.file = new File(plugin.getDataFolder(), name);
-    this.path = new File(plugin.getDataFolder() + path);
+  public CustomYML(TabCompleteFilter tabCompleteFilter, String name, String path) {
+    super(tabCompleteFilter);
+    this.file = new File(tabCompleteFilter.getDataFolder(), name);
+    this.path = new File(tabCompleteFilter.getDataFolder(), path);
     createFile();
   }
 

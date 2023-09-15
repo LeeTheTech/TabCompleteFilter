@@ -16,7 +16,7 @@ public class FileManager {
   }
 
   public void createYML(String name) {
-    ymlFiles.put(name, new CustomYML(name + ".yml", "", tabCompleteFilter));
+    ymlFiles.put(name, new CustomYML(tabCompleteFilter, name + ".yml", ""));
   }
 
   public CustomYML getYML(String name) {

@@ -79,10 +79,8 @@ public class RemoveCMD extends SubCommand {
 
   @Override
   public List<String> onTabComplete(CommandSender sender, String[] args) {
-    if (args.length == 2)
-      return StringUtil.copyPartialMatches(args[1], tabCompleteFilter.getData().getAllGroups(), new ArrayList<>());
-    else if (args.length == 3)
-      return StringUtil.copyPartialMatches(args[2], Collections.singletonList("<command>"), new ArrayList<>());
+    if (args.length == 2) return StringUtil.copyPartialMatches(args[1], tabCompleteFilter.getData().getAllGroups(), new ArrayList<>());
+    else if (args.length == 3) return StringUtil.copyPartialMatches(args[2], Collections.singletonList("<command>"), new ArrayList<>());
     return new ArrayList<>();
   }
 }

@@ -57,16 +57,8 @@ public class ListCMD extends SubCommand {
       int index;
       int page = 0;
       if (args.length > 2) {
-        if (CoreUtil.isPositiveIntNumber(args[2])) {
-          if (Integer.parseInt(args[2]) < 0) return;
-          page = Integer.parseInt(args[2]);
-        } else {
-          player.sendMessage(FileLang.PREFIX.getString(null) + FileLang.ERROR_COMMAND_LIST_PAGE.getString(new String[]{args[2]}));
-          return;
-        }
+        if (CoreUtil.isPositiveIntNumber(args[2])) page = Integer.parseInt(args[2]);
       }
-      if (page < 0) return;
-
       final List<TextComponent> lines = new ArrayList<>();
       final List<String> commands = data.getGroupCommands(group);
       if (commands != null && !commands.isEmpty()) {
@@ -85,7 +77,7 @@ public class ListCMD extends SubCommand {
         }
       }
 
-      if (lines.size() < 5) return;
+      if (lines.size() == 4) return;
       lines.add(new TextComponent(""));
 
       final TextComponent next = FileLang.COMMAND_LIST_NEXT_PAGE.getTextComponent(null);
@@ -117,8 +109,7 @@ public class ListCMD extends SubCommand {
 
   @Override
   public List<String> onTabComplete(CommandSender sender, String[] args) {
-    if (args.length == 2)
-      return StringUtil.copyPartialMatches(args[1], tabCompleteFilter.getData().getAllGroups(), new ArrayList<>());
+    if (args.length == 2) return StringUtil.copyPartialMatches(args[1], tabCompleteFilter.getData().getAllGroups(), new ArrayList<>());
     return new ArrayList<>();
   }
 }
