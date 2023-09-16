@@ -22,7 +22,7 @@ public class FilterListener implements Listener {
   public void onCommandTabShow(PlayerCommandSendEvent e) {
     final Player player = e.getPlayer();
     if (FileConfig.OP_BYPASS.getBoolean() && player.isOp()) return;
-    if (player.hasPermission("tcf.bypass")) return;
+    if (!player.isOp() && player.hasPermission("tcf.bypass")) return;
     e.getCommands().clear();
     final Data data = tabCompleteFilter.getData();
     final ArrayList<String> groups = data.getPlayerGroup(player);
