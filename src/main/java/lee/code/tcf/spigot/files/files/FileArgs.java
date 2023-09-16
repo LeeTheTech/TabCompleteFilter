@@ -7,7 +7,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum FileArgs {
   ENABLED("enabled", "false"),
-
   ;
 
   @Getter private final String path;
