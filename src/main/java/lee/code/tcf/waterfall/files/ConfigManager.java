@@ -1,6 +1,6 @@
-package lee.code.tcf.bungee.files;
+package lee.code.tcf.waterfall.files;
 
-import lee.code.tcf.bungee.TabCompleteFilter;
+import lee.code.tcf.waterfall.TabCompleteFilter;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;

@@ -1,7 +1,7 @@
-package lee.code.tcf.bungee.listeners;
+package lee.code.tcf.waterfall.listeners;
 
 import io.github.waterfallmc.waterfall.event.ProxyDefineCommandsEvent;
-import lee.code.tcf.bungee.TabCompleteFilter;
+import lee.code.tcf.waterfall.TabCompleteFilter;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.Listener;

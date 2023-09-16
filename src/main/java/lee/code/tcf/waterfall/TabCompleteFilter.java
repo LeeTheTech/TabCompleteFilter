@@ -1,7 +1,7 @@
-package lee.code.tcf.bungee;
+package lee.code.tcf.waterfall;
 
-import lee.code.tcf.bungee.files.ConfigManager;
-import lee.code.tcf.bungee.listeners.FilterListener;
+import lee.code.tcf.waterfall.files.ConfigManager;
+import lee.code.tcf.waterfall.listeners.FilterListener;
 import lombok.Getter;
 import net.md_5.bungee.api.plugin.Plugin;
 
