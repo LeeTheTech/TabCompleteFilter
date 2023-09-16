@@ -6,12 +6,12 @@ import lombok.Getter;
 
 @AllArgsConstructor
 public enum FileConfig {
-    OP_BYPASS("op-player-filter-bypass", "false"),
-    ;
-    @Getter private final String path;
-    @Getter private final String string;
+  OP_BYPASS("op-player-filter-bypass", "false"),
+  ;
+  @Getter private final String path;
+  @Getter private final String string;
 
-    public boolean getBoolean() {
-        return TabCompleteFilter.getInstance().getFileManager().getBooleanFromFile(File.ARGS.name().toLowerCase(), path);
-    }
+  public boolean getBoolean() {
+    return TabCompleteFilter.getInstance().getFileManager().getBooleanFromFile(File.ARGS.name().toLowerCase(), path);
+  }
 }
