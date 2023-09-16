@@ -1,6 +1,7 @@
 package lee.code.tcf.spigot.files;
 
 import java.util.HashMap;
+import java.util.Locale;
 
 import lee.code.tcf.spigot.util.CoreUtil;
 import lee.code.tcf.spigot.TabCompleteFilter;
@@ -13,6 +14,7 @@ public class FileManager {
 
   public FileManager(TabCompleteFilter tabCompleteFilter) {
     this.tabCompleteFilter = tabCompleteFilter;
+    Locale.setDefault(Locale.ENGLISH);
   }
 
   public void createYML(String name) {
