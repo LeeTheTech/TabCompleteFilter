@@ -12,6 +12,6 @@ public enum FileConfig {
   @Getter private final String string;
 
   public boolean getBoolean() {
-    return TabCompleteFilter.getInstance().getFileManager().getBooleanFromFile(File.ARGS.name().toLowerCase(), path);
+    return TabCompleteFilter.getInstance().getFileManager().getBooleanFromFile(File.CONFIG.name().toLowerCase(), path);
   }
 }
