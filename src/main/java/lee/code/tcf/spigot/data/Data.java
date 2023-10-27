@@ -70,7 +70,14 @@ public class Data {
     switch (file) {
       case CONFIG -> {
         for (FileConfig value : FileConfig.values()) {
-          if (!yaml.contains(value.getPath())) yaml.set(value.getPath(), value.getString());
+          if (!yaml.contains(value.getPath())) {
+            switch (value.getFileDataType()) {
+              case BOOLEAN -> yaml.set(value.getPath(), Boolean.parseBoolean(value.getString()));
+              case DOUBLE -> yaml.set(value.getPath(), Double.parseDouble(value.getString()));
+              case INT -> yaml.set(value.getPath(), Integer.parseInt(value.getString()));
+              case STRING -> yaml.set(value.getPath(), value.getString());
+            }
+          }
         }
         final ConfigurationSection groups = yaml.getConfigurationSection("groups");
         if (groups == null) return;
@@ -83,7 +90,14 @@ public class Data {
       }
       case ARGS -> {
         for (FileArgs value : FileArgs.values()) {
-          if (!yaml.contains(value.getPath())) yaml.set(value.getPath(), value.getString());
+          if (!yaml.contains(value.getPath())) {
+            switch (value.getFileDataType()) {
+              case BOOLEAN -> yaml.set(value.getPath(), Boolean.parseBoolean(value.getString()));
+              case DOUBLE -> yaml.set(value.getPath(), Double.parseDouble(value.getString()));
+              case INT -> yaml.set(value.getPath(), Integer.parseInt(value.getString()));
+              case STRING -> yaml.set(value.getPath(), value.getString());
+            }
+          }
         }
 
         final ConfigurationSection commands = yaml.getConfigurationSection("custom-args");
