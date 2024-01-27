@@ -4,12 +4,6 @@
 
 Guides and info about this plugin can be found on our [Wiki](https://lees-plugins.gitbook.io/tabcompletefilter/).
 
-## Support
-
-Need help with using TabCompleteFilter? Join our [Discord](https://discord.com/invite/h9abyCPPZX).
-
-If you need to report a bug or want to suggest a new feature, you can [open an issue on GitHub](https://github.com/SirLeezus/TabCompleteFilter/issues).
-
 ## Building
 
 To build TabCompleteFilter, you need JDK 16 or higher installed on your system.
