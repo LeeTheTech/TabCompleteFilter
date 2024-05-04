@@ -2,6 +2,7 @@ name: TabCompleteFilter
 main: lee.code.tcf.spigot.TabCompleteFilter
 version: ${version}
 api-version: 1.13
+folia-supported: true
 author: Lee
 commands:
   tcf:
