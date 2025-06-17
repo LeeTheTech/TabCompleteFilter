@@ -6,7 +6,7 @@ enabled: false
 custom-args:
   '1':
     permission-check: true
-    permission: 'essentials.warp.'
+    permission: 'essentials.warps.'
     command: 'warp'
     args:
       '1':

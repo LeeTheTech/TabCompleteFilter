@@ -1,5 +1,0 @@
-name: TabCompleteFilter
-main: lee.code.tcf.waterfall.TabCompleteFilter
-version: ${version}
-api-version: 1.13
-author: Lee
